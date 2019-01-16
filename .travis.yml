@@ -3,22 +3,21 @@ services:
   - docker
 
 before_install:
-  - docker build -t jbanks3/react-test -f ./client/Dockerfile.dev ./client
+  - docker build -t jbanks2/react-test -f ./client/Dockerfile.dev ./client
 
 script:
-  # - docker run jbanks3/react-test npm test --coverage
-  - docker run jbanks3/react-test npm test -- --coverage
+  - docker run jbanks2/react-test npm test -- --coverage
 
 after_success:
-  - docker build -t jbanks3/multi-client ./client
-  - docker build -t jbanks3/multi-nginx ./nginx
-  - docker build -t jbanks3/multi-server ./server
-  - docker build -t jbanks3/multi-workder ./worker
+  - docker build -t jbanks2/multi-client ./client
+  - docker build -t jbanks2/multi-nginx ./nginx
+  - docker build -t jbanks2/multi-server ./server
+  - docker build -t jbanks2/multi-workder ./worker
   # Log in to the docker CLI
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
   # Take those images and push them to docker hub
-  - docker push jbanks3/multi-client
-  - docker push jbanks3/multi-nginx
-  - docker push jbanks3/multi-server
-  - docker push jbanks3/multi-worker
-  
+  - docker push jbanks2/multi-client
+  - docker push jbanks2/multi-nginx
+  - docker push jbanks2/multi-server
+  - docker push jbanks2/multi-worker
+
